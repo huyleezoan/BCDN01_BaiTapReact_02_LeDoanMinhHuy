@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import dataGlass from "./Data/dataGlasses.json"
+import Glass from './Glass'
 export default class HomeComponent extends Component {
     state = {
         glass: {
@@ -10,18 +11,14 @@ export default class HomeComponent extends Component {
             "desc": "Light pink square lenses define these sunglasses, ending with amother of pearl effect tip. "
         }
     }
-    renderListGlass = () => {
-        return dataGlass.map((item, index) => {
-            return <div className="col-4 pb-5">
-                <img onClick={() => {
-                    this.changeGlass(item)
-                }} className="ml-2 p-2 border border-width-1" src={item.url} style={{ width: 110, cursor: 'pointer' }} alt="..." />
-            </div>
-        })
-    }
     changeGlass = (newGlass) => {
         this.setState({
             glass: newGlass
+        })
+    }
+    renderListGlass = () => {
+        return dataGlass.map((item, index) => {
+            return <Glass glass={item} changeGlassChild={this.changeGlass} />
         })
     }
     render() {
